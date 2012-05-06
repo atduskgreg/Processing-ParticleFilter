@@ -29,8 +29,12 @@ void draw() {
   background(255);
   drawBoundaries();
   robot.draw();
+  float[] sensors = robot.sense();
+  particleFilter.update(sensors);
+  
   particleFilter.draw();
-  robot.sense();
+
+  println("left: " + sensors[0] + "\tright: " +  sensors[1] + "\tup: " +  sensors[2] + "\tdown: " +  sensors[3]);
 }
 
 void drawBoundaries() {
