@@ -38,18 +38,29 @@ class Robot {
       pushStyle();
       stroke(0, 0, 255);  
       line((float)l.getX1(), (float)l.getY1(), (float)l.getX2(), (float)l.getY2());
+      
+      float closestIntersection = width;
+      PVector boundaryIntersection = new PVector();
+      
       popStyle();
-
       for (int j = 0; j < boundaries.size(); j++) {
         Rectangle b = boundaries.get(j);
         PVector intersect = lineRectIntersect(lines[i], b);
         if (intersect != null) {
-          pushStyle();
-          fill(255, 0, 0);
-          ellipse(intersect.x, intersect.y, 10, 10);
-          popStyle();
+          float distanceFromRobot = intersect.dist(new PVector(x,y));
+          
+          if(distanceFromRobot < closestIntersection){
+              boundaryIntersection = intersect;
+              closestIntersection = distanceFromRobot;
+          }
+         
         }
       }
+      
+      pushStyle();
+          fill(255, 0, 0);
+          ellipse(boundaryIntersection.x, boundaryIntersection.y, 10, 10);
+          popStyle();
     }
     return result;
   }
