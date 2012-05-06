@@ -20,7 +20,7 @@ class Robot {
     popStyle();
   }
 
-  float[] sense() {
+  float[] sense(boolean doDraw) {
     Line2D[] lines = new Line2D[numSensors];
     // look left
     lines[0] = new Line2D.Float(float(x), float(y), float(x - width), float(y));   
@@ -35,14 +35,16 @@ class Robot {
 
     for (int i = 0; i < lines.length; i++) {
       Line2D l = lines[i];
-      pushStyle();
-      stroke(0, 0, 255);  
-      line((float)l.getX1(), (float)l.getY1(), (float)l.getX2(), (float)l.getY2());
+      if (doDraw) {
+        pushStyle();
+        stroke(0, 0, 255);  
+        line((float)l.getX1(), (float)l.getY1(), (float)l.getX2(), (float)l.getY2());
+        popStyle();
 
-      float closestIntersection = width;
-      PVector boundaryIntersection = new PVector();
-
-      popStyle();
+      }
+        float closestIntersection = width;
+        PVector boundaryIntersection = new PVector();
+      
       for (int j = 0; j < boundaries.size(); j++) {
         Rectangle b = boundaries.get(j);
         PVector intersect = lineRectIntersect(lines[i], b);
@@ -55,12 +57,14 @@ class Robot {
           }
         }
       }
-      
+
       result[i] = closestIntersection;
-      pushStyle();
-      fill(255, 0, 0);
-      ellipse(boundaryIntersection.x, boundaryIntersection.y, 10, 10);
-      popStyle();
+      if (doDraw) {
+        pushStyle();
+        fill(255, 0, 0);
+        ellipse(boundaryIntersection.x, boundaryIntersection.y, 10, 10);
+        popStyle();
+      }
     }
     return result;
   }
