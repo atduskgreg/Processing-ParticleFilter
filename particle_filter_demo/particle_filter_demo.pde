@@ -28,10 +28,8 @@ void setup() {
 void draw() {
   background(255);
   drawBoundaries();
+  robot.sense(true);
   robot.draw();
-  float[] sensors = robot.sense(true);
-  particleFilter.update(sensors);
-  
   particleFilter.draw();
 
   //println("left: " + sensors[0] + "\tright: " +  sensors[1] + "\tup: " +  sensors[2] + "\tdown: " +  sensors[3]);
@@ -95,6 +93,14 @@ void keyPressed(){
      if(keyCode == RIGHT){
       robot.x += robot.velocity;
     }
+    
+    float[] sensors = robot.sense(false);
+
+    particleFilter.update(sensors);
+
+    particleFilter.repopulate();
+
+
   }
 }
 
