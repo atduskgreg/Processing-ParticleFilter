@@ -34,7 +34,7 @@ class Robot {
     float[] result = new float[4];
 
     for (int i = 0; i < lines.length; i++) {
-      l = lines[i];
+      Line2D l = lines[i];
       pushStyle();
       stroke(0, 0, 255);  
       line((float)l.getX1(), (float)l.getY1(), (float)l.getX2(), (float)l.getY2());

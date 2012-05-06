@@ -5,9 +5,6 @@ ArrayList<Rectangle> boundaries;
 Robot robot;
 ParticleFilter particleFilter;
 
-Line2D l;
-Rectangle lr;
-
 void setup() {
   size(500, 500);
   boundaries = new ArrayList();
@@ -26,8 +23,6 @@ void setup() {
 
   robot = new Robot(int(random(0, width)), int(random(0, height)));
   particleFilter = new ParticleFilter(width, height);
-
-  l = new Line2D.Float(20.0, 200.0, 200.0, 10.0);
 }
 
 void draw() {
@@ -35,7 +30,6 @@ void draw() {
   drawBoundaries();
   robot.draw();
   particleFilter.draw();
-
   robot.sense();
 }
 
