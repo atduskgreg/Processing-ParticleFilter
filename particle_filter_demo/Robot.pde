@@ -1,10 +1,10 @@
 class Robot {
-  int x;
-  int y;
+  float x;
+  float y;
   int numSensors;
   int velocity;
 
-  Robot(int x, int y) {
+  Robot(float x, float y) {
     this.x = x;
     this.y = y;
 
@@ -23,13 +23,13 @@ class Robot {
   float[] sense(boolean doDraw) {
     Line2D[] lines = new Line2D[numSensors];
     // look left
-    lines[0] = new Line2D.Float(float(x), float(y), float(x - width), float(y));   
+    lines[0] = new Line2D.Float(x, y, x - width, y);   
     // look right
-    lines[1] = new Line2D.Float(float(x), float(y), float(x + width), float(y));   
+    lines[1] = new Line2D.Float(x, y, x + width, y);   
     // look up
-    lines[2] = new Line2D.Float(float(x), float(y), float(x), float(y - height));   
+    lines[2] = new Line2D.Float(x, y, x, y - height);   
     // look down
-    lines[3] = new Line2D.Float(float(x), float(y), float(x), float(y + height));   
+    lines[3] = new Line2D.Float(x, y, x, y + height);   
 
     float[] result = new float[4];
 
